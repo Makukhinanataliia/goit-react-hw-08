@@ -1,4 +1,4 @@
-import { useEffect, lazy } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import { refreshUser } from "./redux/auth/operations";
@@ -24,43 +24,46 @@ export default function App() {
   }, [dispatch]);
 
   if (isRefreshing) {
-    return <div>Loading...</div>;
+    return <div>Loading user data...</div>;
   }
 
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<HomePage />} />
+    // Suspense для ленивого завантаження компонентів
+    <Suspense fallback={<div>Loading page...</div>}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
 
-        <Route
-          path="/register"
-          element={
-            <RestrictedRoute redirectTo="/contacts">
-              <RegistrationPage />
-            </RestrictedRoute>
-          }
-        />
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute redirectTo="/contacts">
+                <RegistrationPage />
+              </RestrictedRoute>
+            }
+          />
 
-        <Route
-          path="/login"
-          element={
-            <RestrictedRoute redirectTo="/contacts">
-              <LoginPage />
-            </RestrictedRoute>
-          }
-        />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute redirectTo="/contacts">
+                <LoginPage />
+              </RestrictedRoute>
+            }
+          />
 
-        <Route
-          path="/contacts"
-          element={
-            <PrivateRoute redirectTo="/login">
-              <ContactsPage />
-            </PrivateRoute>
-          }
-        />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute redirectTo="/login">
+                <ContactsPage />
+              </PrivateRoute>
+            }
+          />
 
-        <Route path="*" element={<HomePage />} />
-      </Route>
-    </Routes>
+          <Route path="*" element={<HomePage />} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 }
