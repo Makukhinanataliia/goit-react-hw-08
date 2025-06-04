@@ -6,8 +6,8 @@ import {
   selectFilteredContacts,
   selectLoading,
   selectError,
-} from "../../redux/contactsSlice";
-import { fetchContacts } from "../../redux/contactsOps";
+} from "../redux/contacts/slice";
+import { fetchContacts } from "../redux/contacts/operations";
 import Spinner from "../Spinner/Spinner"; 
 
 export default function ContactList() {
