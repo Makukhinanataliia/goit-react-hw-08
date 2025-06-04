@@ -15,14 +15,13 @@ export default function RegistrationForm({ onSubmit }) {
     password: Yup.string().min(6, "At least 6 characters").required("Required"),
   });
 
-  // Обгортка для обрізання пробілів
+
   const handleSubmitWithTrim = (values, formikHelpers) => {
     const trimmedValues = {
       name: values.name.trim(),
       email: values.email.trim(),
       password: values.password.trim(),
     };
-
     onSubmit(trimmedValues, formikHelpers);
   };
 
