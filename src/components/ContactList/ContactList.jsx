@@ -6,7 +6,7 @@ import {
   selectFilteredContacts,
   selectLoading,
   selectError,
-} from "../redux/contacts/slice";
+} from "../../redux/contacts/slice";
 import { fetchContacts } from "../redux/contacts/operations";
 import Spinner from "../Spinner/Spinner"; 
 

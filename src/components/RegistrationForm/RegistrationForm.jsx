@@ -19,7 +19,8 @@ export default function RegistrationForm({ onSubmit }) {
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={onSubmit}
+          onSubmit={onSubmit}
+          
     >
       <Form className={styles.form}>
         <label className={styles.label}>
@@ -50,4 +51,5 @@ export default function RegistrationForm({ onSubmit }) {
       </Form>
     </Formik>
   );
+    
 }
