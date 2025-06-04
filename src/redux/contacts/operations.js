@@ -1,20 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Базовий URL для бекенду GOIT
+
 axios.defaults.baseURL = "https://connections-api.goit.global";
 
-// Функція для додавання токена до заголовків авторизації
+
 const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-// Функція для видалення токена з заголовків авторизації
+
 const clearAuthHeader = () => {
   delete axios.defaults.headers.common.Authorization;
 };
 
-// Отримати всі контакти
+
 export const fetchContacts = createAsyncThunk(
   "contacts/fetchAll",
   async (_, thunkAPI) => {
@@ -57,7 +57,7 @@ export const addContact = createAsyncThunk(
   }
 );
 
-// Видалити контакт
+
 export const deleteContact = createAsyncThunk(
   "contacts/deleteContact",
   async (contactId, thunkAPI) => {
