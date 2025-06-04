@@ -15,13 +15,14 @@ export const register = createAsyncThunk(
   "auth/register",
   async (credentials, thunkAPI) => {
     try {
-      const { name, ...safeCredentials } = credentials;
-      const res = await axios.post("/users/signup", safeCredentials);
-
+      // Відправляємо повний об'єкт credentials з name, email, password
+      const res = await axios.post("/users/signup", credentials);
       setAuthHeader(res.data.token);
       return res.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || error.message || "Unknown error"
+      );
     }
   }
 );
@@ -34,7 +35,9 @@ export const login = createAsyncThunk(
       setAuthHeader(res.data.token);
       return res.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || error.message || "Unknown error"
+      );
     }
   }
 );
@@ -44,7 +47,9 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
     await axios.post("/users/logout");
     clearAuthHeader();
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
+    return thunkAPI.rejectWithValue(
+      error.response?.data?.message || error.message || "Unknown error"
+    );
   }
 });
 
@@ -69,6 +74,3 @@ export const refreshUser = createAsyncThunk(
     }
   }
 );
-
-
-
