@@ -19,19 +19,19 @@ const authSlice = createSlice({
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
-        localStorage.setItem("token", action.payload.token); // Зберігаємо токен
+        localStorage.setItem("token", action.payload.token);
       })
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
-        localStorage.setItem("token", action.payload.token); // Зберігаємо токен
+        localStorage.setItem("token", action.payload.token);
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = { name: null, email: null };
         state.token = null;
         state.isLoggedIn = false;
-        localStorage.removeItem("token"); // Видаляємо токен
+        localStorage.removeItem("token");
       })
       .addCase(refreshUser.pending, (state) => {
         state.isRefreshing = true;
@@ -45,7 +45,7 @@ const authSlice = createSlice({
         state.isRefreshing = false;
         state.isLoggedIn = false;
         state.token = null;
-        localStorage.removeItem("token"); // Видаляємо токен якщо оновлення не вдалось
+        localStorage.removeItem("token");
       });
   },
 });

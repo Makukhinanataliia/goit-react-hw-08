@@ -28,7 +28,6 @@ export default function App() {
   }
 
   return (
-    // Suspense для ленивого завантаження компонентів
     <Suspense fallback={<div>Loading page...</div>}>
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -37,31 +36,28 @@ export default function App() {
           <Route
             path="/register"
             element={
-              <RestrictedRoute redirectTo="/contacts">
-                <RegistrationPage />
-              </RestrictedRoute>
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={RegistrationPage}
+              />
             }
           />
 
           <Route
             path="/login"
             element={
-              <RestrictedRoute redirectTo="/contacts">
-                <LoginPage />
-              </RestrictedRoute>
+              <RestrictedRoute redirectTo="/contacts" component={LoginPage} />
             }
           />
 
           <Route
             path="/contacts"
             element={
-              <PrivateRoute redirectTo="/login">
-                <ContactsPage />
-              </PrivateRoute>
+              <PrivateRoute redirectTo="/login" component={ContactsPage} />
             }
           />
 
-          <Route path="*" element={<HomePage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </Suspense>

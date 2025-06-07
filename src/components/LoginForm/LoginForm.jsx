@@ -1,8 +1,12 @@
+import { useDispatch } from "react-redux";
+import { logIn } from "../../redux/auth/operations";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import styles from "./LoginForm.module.css";
 
-export default function LoginForm({ onSubmit }) {
+export default function LoginForm() {
+  const dispatch = useDispatch();
+
   const initialValues = {
     email: "",
     password: "",
@@ -13,11 +17,16 @@ export default function LoginForm({ onSubmit }) {
     password: Yup.string().min(6, "At least 6 characters").required("Required"),
   });
 
+  const handleSubmit = (values, actions) => {
+    dispatch(logIn(values));
+    actions.resetForm();
+  };
+
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
     >
       <Form className={styles.form}>
         <label className={styles.label}>

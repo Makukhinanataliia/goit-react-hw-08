@@ -3,29 +3,29 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 axios.defaults.baseURL = "https://connections-api.goit.global";
 
-// Встановлює заголовок Authorization з токеном
+
 const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-// Очищає заголовок Authorization
+
 const clearAuthHeader = () => {
   delete axios.defaults.headers.common.Authorization;
 };
 
-// Операція реєстрації користувача
+
 export const register = createAsyncThunk(
   "auth/register",
   async (credentials, thunkAPI) => {
     try {
-      // Надсилаємо всі поля: name, email, password
+
       const res = await axios.post("/users/signup", credentials);
 
-      // Встановлюємо токен в заголовок для подальших запитів
+
       setAuthHeader(res.data.token);
       return res.data;
     } catch (error) {
-      // Повертаємо детальний текст помилки з API або дефолтний
+
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || error.message || "Unknown error"
       );
@@ -49,7 +49,7 @@ export const login = createAsyncThunk(
   }
 );
 
-// Операція логауту користувача
+
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
     await axios.post("/users/logout");
@@ -61,7 +61,6 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   }
 });
 
-// Операція оновлення даних користувача (після перезавантаження сторінки)
 export const refreshUser = createAsyncThunk(
   "auth/refresh",
   async (_, thunkAPI) => {
