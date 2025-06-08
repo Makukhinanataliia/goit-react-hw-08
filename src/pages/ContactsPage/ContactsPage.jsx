@@ -4,21 +4,9 @@ import ContactsForm from "../../components/ContactsForm/ContactsForm";
 import ContactList from "../../components/ContactList/ContactList";
 import { fetchContacts } from "../../redux/contacts/operations";
 import styles from "./ContactsPage.module.css";
-
-import Filter from "../components/Filter/Filter"; 
+import Filter from "../../components/Filter/Filter"; 
 
 const ContactsPage = () => {
-  return (
-    <div>
-      <h1>Your Contacts</h1>
-      <Filter /> 
-      <ContactList />{" "}
-    
-    </div>
-  );
-};
-
-export default function ContactsPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,7 +17,10 @@ export default function ContactsPage() {
     <div className={styles.container}>
       <h2 className={styles.title}>Your Contacts</h2>
       <ContactsForm />
+      <Filter />
       <ContactList />
     </div>
   );
-}
+};
+
+export default ContactsPage;
