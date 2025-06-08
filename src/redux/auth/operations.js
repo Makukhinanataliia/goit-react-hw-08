@@ -33,7 +33,6 @@ export const register = createAsyncThunk(
   }
 );
 
-// Операція логіну користувача
 export const login = createAsyncThunk(
   "auth/login",
   async (credentials, thunkAPI) => {

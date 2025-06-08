@@ -5,6 +5,19 @@ import ContactList from "../../components/ContactList/ContactList";
 import { fetchContacts } from "../../redux/contacts/operations";
 import styles from "./ContactsPage.module.css";
 
+import Filter from "../components/Filter/Filter"; 
+
+const ContactsPage = () => {
+  return (
+    <div>
+      <h1>Your Contacts</h1>
+      <Filter /> 
+      <ContactList />{" "}
+    
+    </div>
+  );
+};
+
 export default function ContactsPage() {
   const dispatch = useDispatch();
 
